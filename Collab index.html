@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Library</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 50%, #ff9a76 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .paper {
+            position: absolute;
+            width: 30px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 2px solid rgba(139, 69, 19, 0.3);
+            border-radius: 2px;
+            animation: fall linear infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translateY(50vh) rotate(180deg);
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 50px 40px;
+            border-radius: 25px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #8B4513;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            font-weight: bold;
+        }
+
+        .subtitle {
+            color: #A0522D;
+            font-size: 1.1em;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .link-btn {
+            background: linear-gradient(135deg, #ff9a76 0%, #fcb69f 100%);
+            color: white;
+            text-decoration: none;
+            padding: 18px 30px;
+            border-radius: 50px;
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .link-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .link-btn:hover:before {
+            left: 100%;
+        }
+
+        .link-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .icon {
+            font-size: 1.5em;
+        }
+
+        .footer {
+            margin-top: 30px;
+            color: #8B4513;
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 The Library</h1>
+        <p class="subtitle">Jendela menuju dunia pengetahuan</p>
+        
+        <div class="links">
+            <a href="https://www.webtoons.com" target="_blank" class="link-btn">
+                <span class="icon">🎨</span>
+                <span>Comic</span>
+            </a>
+            
+            <a href="https://www.wattpad.com/" target="_blank" class="link-btn">
+                <span class="icon">📖</span>
+                <span>Novel</span>
+            </a>
+            
+            <a href="https://www.gramedia.com/best-seller/buku-motivasi-self-improvement/" target="_blank" class="link-btn">
+                <span class="icon">💪</span>
+                <span>Motivation</span>
+            </a>
+            
+            <a href="https://www.encyclopedia.com/" target="_blank" class="link-btn">
+                <span class="icon">🌍</span>
+                <span>Ensiklopedia</span>
+            </a>
+            
+            <a href="https://rumahfilsafat.com/" target="_blank" class="link-btn">
+                <span class="icon">🧠</span>
+                <span>Filosofi</span>
+            </a>
+        </div>
+        
+        <div class="footer">
+            ✨ Membaca adalah jendela dunia ✨
+        </div>
+    </div>
+
+    <script>
+        // Membuat kertas berjatuhan
+        function createPaper() {
+            const paper = document.createElement('div');
+            paper.classList.add('paper');
+            
+            // Posisi horizontal random
+            paper.style.left = Math.random() * 100 + 'vw';
+            
+            // Durasi animasi random (8-15 detik)
+            const duration = Math.random() * 7 + 8;
+            paper.style.animationDuration = duration + 's';
+            
+            // Delay random
+            paper.style.animationDelay = Math.random() * 5 + 's';
+            
+            // Ukuran sedikit bervariasi
+            const scale = Math.random() * 0.5 + 0.75;
+            paper.style.transform = `scale(${scale})`;
+            
+            document.body.appendChild(paper);
+            
+            // Hapus elemen setelah animasi selesai
+            setTimeout(() => {
+                paper.remove();
+            }, (duration + 5) * 1000);
+        }
+
+        // Buat kertas secara berkala
+        setInterval(createPaper, 800);
+        
+        // Buat beberapa kertas di awal
+        for (let i = 0; i < 15; i++) {
+            setTimeout(createPaper, i * 300);
+        }
+    </script>
+</body>
+</html>
